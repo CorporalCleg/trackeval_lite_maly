@@ -16,10 +16,10 @@ TrackEval Lite simplifies the usage and setup process compared to the original T
 Metric Family | Sub metrics | Paper | Code |
 |-------------|-------------|-------|------|
 |             |             |       |      |
-|**HOTA metrics**|HOTA, DetA, AssA, LocA, DetPr, DetRe, AssPr, AssRe|[paper](https://link.springer.com/article/10.1007/s11263-020-01375-2)|[code](trackeval/metrics/hota.py)|
-|**CLEARMOT metrics**|MOTA, MOTP, MT, ML, Frag, etc.|[paper](https://link.springer.com/article/10.1155/2008/246309)|[code](trackeval/metrics/clear.py)|
-|**Identity metrics**|IDF1, IDP, IDR|[paper](https://arxiv.org/abs/1609.01775)|[code](trackeval/metrics/identity.py)|
-|**VACE metrics**|ATA, SFDA|[paper](https://link.springer.com/chapter/10.1007/11612704_16)|[code](trackeval/metrics/vace.py)|
+|**HOTA metrics**|HOTA, DetA, AssA, LocA, DetPr, DetRe, AssPr, AssRe|[paper](https://link.springer.com/article/10.1007/s11263-020-01375-2)|[code](trackeval_lite/metrics/hota.py)|
+|**CLEARMOT metrics**|MOTA, MOTP, MT, ML, Frag, etc.|[paper](https://link.springer.com/article/10.1155/2008/246309)|[code](trackeval_lite/metrics/clear.py)|
+|**Identity metrics**|IDF1, IDP, IDR|[paper](https://arxiv.org/abs/1609.01775)|[code](trackeval_lite/metrics/identity.py)|
+|**VACE metrics**|ATA, SFDA|[paper](https://link.springer.com/chapter/10.1007/11612704_16)|[code](trackeval_lite/metrics/vace.py)|
 
 ## Input Format
 
@@ -42,17 +42,35 @@ The script requires two files: a ground truth file and a tracker result file. Bo
 ```bash
 git clone https://github.com/30-A/trackeval_lite
 cd trackeval_lite
-pip install -r requirements.txt
+pip install .
 ```
 
 ## How to Run
 
+### Command Line
 ```bash
-python scripts/run_mot_challenge.py \
+trackeval-lite \
   --GT_PATH path/to/gt.txt \
   --TRACKER_PATH path/to/tracker.txt \
   --SEQ_LENGTH 1000 \
   --METRICS HOTA CLEAR VACE Identity
+```
+Alternatively, you can still run the script directly:
+```bash
+python trackeval_lite/scripts/run_mot_challenge.py ...
+```
+
+### Python API
+```python
+from trackeval_lite.scripts import run_mot_challenge_evaluation
+
+results = run_mot_challenge_evaluation(
+    gt_path='path/to/gt.txt',
+    tracker_path='path/to/tracker.txt',
+    seq_length=1000,
+    metrics=['HOTA', 'CLEAR', 'Identity'],
+    threshold=0.5
+)
 ```
 
 ## Arguments

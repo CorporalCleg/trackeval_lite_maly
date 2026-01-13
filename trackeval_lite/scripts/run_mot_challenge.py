@@ -7,7 +7,7 @@ import pandas as pd
 if __name__ == '__main__':
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import trackeval
+import trackeval_lite
 
 def run_mot_challenge_evaluation(gt_path, tracker_path, seq_length, metrics=['HOTA', 'CLEAR', 'Identity'], threshold=0.5):
     """
@@ -42,16 +42,16 @@ def run_mot_challenge_evaluation(gt_path, tracker_path, seq_length, metrics=['HO
         'THRESHOLD': threshold
     }
 
-    evaluator = trackeval.Evaluator(eval_config)
-    dataset_list = [trackeval.datasets.MotChallenge2DBox(dataset_config)]
+    evaluator = trackeval_lite.Evaluator(eval_config)
+    dataset_list = [trackeval_lite.datasets.MotChallenge2DBox(dataset_config)]
     metrics_list = []
     
     # Map metric names to classes
     metric_map = {
-        'HOTA': trackeval.metrics.HOTA,
-        'CLEAR': trackeval.metrics.CLEAR,
-        'Identity': trackeval.metrics.Identity,
-        'VACE': trackeval.metrics.VACE
+        'HOTA': trackeval_lite.metrics.HOTA,
+        'CLEAR': trackeval_lite.metrics.CLEAR,
+        'Identity': trackeval_lite.metrics.Identity,
+        'VACE': trackeval_lite.metrics.VACE
     }
     
     for metric_name in metrics:

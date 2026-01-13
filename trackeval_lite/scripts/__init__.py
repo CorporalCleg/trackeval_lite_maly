@@ -1,0 +1,2 @@
+from .run_mot_challenge import run_mot_challenge_evaluation
+
