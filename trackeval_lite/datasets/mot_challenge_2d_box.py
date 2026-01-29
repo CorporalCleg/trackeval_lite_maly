@@ -18,6 +18,7 @@ class MotChallenge2DBox(_BaseDataset):
             'TRACKER_PATH': None,
             'SEQ_LENGTH': None,
             'PRINT_CONFIG': False,
+            'BEV': False
         }
         return default_config
 
@@ -157,5 +158,8 @@ class MotChallenge2DBox(_BaseDataset):
         return data
 
     def _calculate_similarities(self, gt_dets_t, tracker_dets_t):
-        similarity_scores = self._calculate_box_ious(gt_dets_t, tracker_dets_t, box_format='xywh')
+        if self.config['BEV']:
+            return self._calculate_euclidean_similarity(gt_dets_t, tracker_dets_t)
+        else:
+            similarity_scores = self._calculate_box_ious(gt_dets_t, tracker_dets_t, box_format='xywh')
         return similarity_scores

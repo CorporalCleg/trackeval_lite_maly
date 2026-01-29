@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
 import trackeval_lite
 
-def run_mot_challenge_evaluation(gt_path, tracker_path, seq_length, metrics=['HOTA', 'CLEAR', 'Identity'], threshold=0.5):
+def run_mot_challenge_evaluation(gt_path, tracker_path, seq_length, metrics=['HOTA', 'CLEAR', 'Identity'], threshold=0.5, bev=False):
     """
     Function to run MOT challenge evaluation.
     
@@ -28,14 +28,16 @@ def run_mot_challenge_evaluation(gt_path, tracker_path, seq_length, metrics=['HO
         'TRACKER_PATH': tracker_path,
         'SEQ_LENGTH': seq_length,
         'METRICS': metrics,
-        'THRESHOLD': threshold
+        'THRESHOLD': threshold,
+        'BEV': bev,
     }
 
     eval_config = {'PRINT_CONFIG': False, 'DISPLAY_LESS_PROGRESS': True}
     dataset_config = {
         'GT_PATH': gt_path,
         'TRACKER_PATH': tracker_path,
-        'SEQ_LENGTH': seq_length
+        'SEQ_LENGTH': seq_length,
+        'BEV': bev,
     }
     metrics_config = {
         'METRICS': metrics,
